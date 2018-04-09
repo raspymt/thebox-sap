@@ -1,0 +1,68 @@
+{
+  "on": "Marche",
+  "off": "Arrêt",
+  "errors": {
+    "credentials": "Erreur d'identification. Veuillez essayer à nouveau."
+  },
+  "links": {
+    "home": "Accueil",
+    "wifi": "Wifi",
+    "applications": "Applications",
+    "login": "Se connecter",
+    "logout": "Se déconnecter"
+  },
+  "login": {
+    "title": "Connexion",
+    "username": "Utilisateur",
+    "password": "Mot-de-passe",
+    "login": "Connexion",
+    "form": {
+      "username": {
+        "feedback": {
+          "empty": "Veuillez saisir votre nom d'utilisateur.",
+          "not_empty": "Votre nom d'utilisateur doit comporter au moins 4 caractères."
+        }
+      },
+      "password": {
+        "feedback": {
+          "empty": "Veuillez saisir votre mot-de-passe.",
+          "not_empty": "Votre mot-de-passe doit comporter au moins 7 caractères."
+        }
+      }
+    }
+  },
+  "logout": {
+    "title": "Déconnexion"
+  },
+  "home": {
+    "title": "Accueil",
+    "content": {
+      "description": "Welcome to The Box. This is were you will be able to manage all The Box parameters."
+    }
+  },
+  "wifi": {
+    "title": "Wifi"
+  },
+  "applications": {
+    "title": "Applications",
+    "mpd": {
+      "title": "MPD",
+      "description": "Controler ce que vous écoutez sur The Box."
+    },
+    "ympd": {
+      "title": "MPD GUI"
+    },
+    "samba": {
+      "title": "Partage",
+      "description": "Share your USB disks over your local network."
+    },
+    "torrents": {
+      "title": "Torrents",
+      "description": "Torrents download manager."
+    },
+    "upnpdlna": {
+      "title": "Serveur UPNP / DLNA",
+      "description": "Acces your media on your external devices."
+    }
+  }
+}

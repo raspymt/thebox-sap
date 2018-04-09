@@ -1,0 +1,102 @@
+///////////////
+// Bootstrap //
+///////////////
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+// Breakpoints
+// @include media-breakpoint-up(xs) {}
+// @include media-breakpoint-up(sm) {}
+// @include media-breakpoint-up(md) {}
+// @include media-breakpoint-up(lg) {}
+// @include media-breakpoint-up(xl) {}
+
+//////////
+// NUXT //
+//////////
+
+// transitions
+.page-enter-active, .page-leave-active {
+  transition: all .5s;
+}
+.page-enter, .page-leave-to {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.slide-enter-active, .slide-leave-active {
+  transition: transform .5s;
+}
+.slide-enter, .slide-leave-to {
+  transform: translateX(-150%);
+}
+
+////////////
+// Styles //
+////////////
+header {
+  margin-bottom: 20px;
+  border: 4px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.btn-rounded {
+  border-radius: 50px;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  width: 35px;
+  height: 35px;
+  &-light {
+    border: 2px solid $light;    
+  }
+  svg {
+    margin-top: -2px;
+  }
+}
+
+.card {
+  overflow: hidden;
+  min-height: 250px;
+}
+// .btn-pulse {
+//   &:hover {
+//     -webkit-animation: fa-spin 1s 0s infinite linear !important;
+//     animation: fa-spin 1s 0s infinite linear !important;    
+//   }
+// }
+
+// override pulse
+.fa-pulse {
+  -webkit-animation: fa-spin 1s 0s infinite linear !important;
+  animation: fa-spin 1s 0s infinite linear !important;
+}
+
+.card-columns .card {
+  display: inline-block;
+  width:100%;
+}
+
+.switch-icon {
+  float: right;
+  margin-top: 0.75rem;
+
+  &__absolute {
+    float: none;
+    margin-top: 0;
+    position: absolute;
+    z-index: 1;
+    top: -25px;
+    right: 5px;
+  }
+}

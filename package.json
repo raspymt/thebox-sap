@@ -1,0 +1,43 @@
+{
+  "name": "the-box-web-management",
+  "version": "1.0.0",
+  "description": "The Box web management",
+  "author": "Yves-Marie Trublin <yvestrublin@gmail.com>",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "@nuxtjs/axios": "^5.3.1",
+    "nuxt": "^1.4.0"
+  },
+  "devDependencies": {
+    "auth0-lock": "^10.24.3",
+    "axios": "^0.17.1",
+    "babel-eslint": "^7.2.3",
+    "bootstrap": "^4.0.0",
+    "bootstrap-vue": "^1.5.1",
+    "eslint": "^4.19.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-html": "^3.1.1",
+    "eslint-plugin-import": "^2.10.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "js-cookie": "^2.2.0",
+    "jwt-decode": "^2.2.0",
+    "node-sass": "^4.8.3",
+    "querystring": "^0.2.0",
+    "sass-loader": "^6.0.7",
+    "uuid": "^3.2.1",
+    "vue-awesome": "^2.3.5",
+    "vue-i18n": "^7.6.0",
+    "vue-i18n-extensions": "^0.1.0"
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "on": "On",
+  "off": "Off",
+  "system": {
+    "power": {
+      "modal": {
+        "shutdowntext": "Are you sure you want to shutdown The Box?",
+        "restarttext": "Are you sure you want to restart The Box?",
+        "shutdownok": "Yes",
+        "restartok": "Yes",
+        "shutdowncancel": "Cancel",
+        "restartcancel": "Cancel",
+        "shutdownconfirmation": "The Box is going to shutdown now.",
+        "restartconfirmation": "The Box is restarting. Please wait a moment.",
+        "offline": "The Box is offline..."
+      }
+    }
+  },
+  "errors": {
+    "credentials": "Wrong credentials. Please try again.",
+    "service": {
+      "enablenow": "Error enabling/starting the service.",
+      "disablenow": "Error disabling/stopping the service.",
+      "poweroff": "Error during shutdown The Box.",
+      "reboot": "Error restarting The Box."
+    }
+  },
+  "links": {
+    "home": "Home",
+    "profile": "Settings",
+    "wifi": "Wifi",
+    "medias": "Medias",
+    "applications": "Applications",
+    "login": "Login",
+    "logout": "Logout",
+    "shutdown": "Shutdown",
+    "restart": "Restart"
+  },
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "login": "Login",
+    "form": {
+      "username": {
+        "feedback": {
+          "empty": "Please enter your username",
+          "not_empty": "Your username must be at least 4 characters long."
+        }
+      },
+      "password": {
+        "feedback": {
+          "empty": "Please enter your password",
+          "not_empty": "Your password must be at least 7 characters long."
+        }
+      }
+    }
+  },
+  "logout": {
+    "title": "Logout"
+  },
+  "index": {
+    "title": "Home",
+    "content": {
+      "description": "Welcome to The Box. This is were you will be able to manage all The Box parameters."
+    }
+  },
+  "wifi": {
+    "title": "Wifi",
+    "networks": {
+      "title": "Networks",
+      "description": "Manage your wifi connection.",
+      "connected": "Connected"
+    },
+    "accesspoint": {
+      "title": "Access Point",
+      "description": "Create a wifi access point. You can use this to create a wifi relay or to directly connect to The Box."
+    }
+  },
+  "medias": {
+    "title": "Medias",
+    "mounts": {
+      "title": "USB Disks"
+    },
+    "eject": "Eject {disk}",
+    "refresh": "Refresh USB disks"
+  },
+  "applications": {
+    "title": "Applications",
+    "mpd": {
+      "title": "MPD",
+      "description": "<p>Listen to your music on The Box. You can find informations on MPD <a href=\"https://en.wikipedia.org/wiki/Music_Player_Daemon\" target=\"_blank\">here</a>.<p><p>You'll need an MPD client to control the music. There are many available MPD clients for Android, IOS or for your computer. For Android I recommend <a href=\"https://play.google.com/store/apps/details?id=com.namelessdev.mpdroid\" target=\"_blank\">MPDroid</a>, it's free.</p><p>As an alternative you can enable the MPD GUI to control the music from your browser.</p>"
+    },
+    "mpdgui": {
+      "title": "MPD GUI",
+      "description": "Control MPD from your browser.",
+      "link": "Click <a href=\"http://thebox:8080\" target=\"_blank\">here</a> ot access the MPD GUI."
+    },
+    "filesharing": {
+      "title": "Sharing",
+      "description": "<p>Share your USB disks over your local network.</p><p>The username is 'thebox'.</p>",
+      "password": {
+        "close": "Hide password change",
+        "open": "Change password"
+      },
+      "credentials": {
+        "title": "File Sharing password",
+        "description": "<p>Change your file sharing password.</p>",
+        "submit": "Submit",
+        "success": "Password changed successfully.",
+        "password": {
+          "title": "Password",
+          "description": "Enter your new password.",
+          "repeat": "Repeat Password",
+          "feedback": {
+            "not_empty": "Your password must be at least 7 characters long.",
+            "password_no_match": "Passwords do not match."
+          }
+        }
+      }
+    },
+    "torrents": {
+      "title": "Torrents",
+      "description": "<p>Torrents download manager.</p>",
+      "link": "Click <a href=\"http://thebox:9091\" target=\"_blank\">here</a> to manage your torrents."
+    },
+    "upnpdlna": {
+      "title": "UPNP / DLNA",
+      "description": "<p>Play your media on your external devices. You can find informations about UPNP <a href=\"https://en.wikipedia.org/wiki/Universal_Plug_and_Play\" target=\"_blank\">here</a> and DLNA <a href=\"https://en.wikipedia.org/wiki/Digital_Living_Network_Alliance\" target=\"_blank\">here</a>.</p><p>You can access your media with VLC or there is plenty of software that can access UPNP/DLNA server.</p>",
+      "link": "Click <a href=\"http://thebox:8200\" target=\"_blank\">here</a> to check UPNP/DLNA status."
+    }
+  },
+  "user": {
+    "title": "User Settings",
+    "credentials": {
+      "title": "Application Credentials",
+      "description": "<p>Change your username and password.</p>",
+      "submit": "Submit",
+      "username": {
+        "title": "Username",
+        "description": "Enter your new username or old one if you don't want to change it.",
+        "feedback": {
+          "not_empty": "Your username must be at least 4 characters long."
+        }
+      },
+      "password": {
+        "title": "Password",
+        "description": "Enter your new password or old one if you don't want to change it.",
+        "repeat": "Repeat Password",
+        "feedback": {
+          "not_empty": "Your password must be at least 7 characters long.",
+          "password_no_match": "Passwords do not match."
+        }
+      },
+      "success": "Username and password changed successfully."
+    }
+  }
+}
