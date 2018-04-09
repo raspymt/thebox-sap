@@ -2,7 +2,7 @@
   <b-card no-body bg-variant="dark" text-variant="white">
     <b-card-header class="clearfix">
       <h4 class="float-left mb-0 mt-2">{{ $t('user.credentials.title') }}</h4>
-      <icon class="switch-icon" name="refresh" v-if="busy" pulse/>
+      <icon class="switch-icon" name="sync" v-if="busy" pulse/>
     </b-card-header>
     <b-card-body>
       <div class="small" v-html="$t('user.credentials.description')"></div>

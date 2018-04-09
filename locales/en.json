@@ -83,7 +83,7 @@
       "title": "USB Disks"
     },
     "eject": "Eject {disk}",
-    "refresh": "Refresh USB disks"
+    "sync": "Refresh USB disks"
   },
   "applications": {
     "title": "Applications",

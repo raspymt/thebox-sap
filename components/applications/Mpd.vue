@@ -10,7 +10,7 @@
         :disabled="mpd_busy || mpdgui_busy"
       />
       <h4 class="float-left mt-2 mb-0">{{ $t('applications.mpd.title') }}</h4>
-      <icon class="switch-icon" name="refresh" v-if="mpd_busy || mpdgui_busy" pulse/>
+      <icon class="switch-icon" name="sync" v-if="mpd_busy || mpdgui_busy" pulse/>
     </b-card-header>
     <b-card-body>
       <div class="small" v-html="$t('applications.mpd.description')"></div>

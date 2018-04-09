@@ -1,6 +1,6 @@
 <template>
   <div class="position-relative mt-2">
-    <icon class="switch-icon__absolute" name="refresh" v-if="busy" pulse/>
+    <icon class="switch-icon__absolute" name="sync" v-if="busy" pulse/>
     <b-form @submit.prevent="updatePassword">
       <transition name="slide">
         <b-alert 

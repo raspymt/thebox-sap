@@ -64,7 +64,7 @@
       ok-variant="light"
       cancel-variant="danger">
       <p class="text-center">
-        <icon name="refresh" v-if="restarting" pulse scale="3"/>
+        <icon name="sync" v-if="restarting" pulse scale="3"/>
       </p>
       <p class="text-center">{{ textModal }}</p>
     </b-modal>

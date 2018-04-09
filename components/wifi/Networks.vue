@@ -10,7 +10,7 @@
         :disabled="busy"
       />
       <h4 class="float-left mb-0 mt-2">{{ $t('wifi.networks.title') }}</h4>
-      <icon class="switch-icon" name="refresh" v-if="busy" pulse/>
+      <icon class="switch-icon" name="sync" v-if="busy" pulse/>
     </b-card-header>
     <b-card-body>
       <p class="small" v-html="$t('wifi.networks.description')"></p>
@@ -38,14 +38,14 @@ export default {
     Network,
     Icon
   },
-  refreshNetworkTimeout: null,
+  synchNetworkTimeout: null,
   methods: {
-    refreshNetworks () {
+    syncNetworks () {
       const config = require('../../thebox.config')
-      clearTimeout(this.refreshNetworkTimeout)
+      clearTimeout(this.syncNetworkTimeout)
       if (!this.busy && this.active === true && this.$store.state.page === 'wifi') {
         this.$store.dispatch('networks', config.api.networks.interface)
-        this.refreshNetworkTimeout = setTimeout(this.refreshNetworks, 10000)
+        this.syncNetworkTimeout = setTimeout(this.synchNetworks, 10000)
       }
     }
   },
@@ -67,11 +67,11 @@ export default {
       }
       this.$store.dispatch('enableDisableNow', { name: 'networks', enable: val })
         .then(() => {
-          setTimeout(this.refreshNetworks, 1000)
+          setTimeout(this.syncNetworks, 1000)
         })
     })
-    setTimeout(this.refreshNetworks, 1000)
-    // this.refreshNetworks()
+    setTimeout(this.syncNetworks, 1000)
+    // this.syncNetworks()
   }
 }
 </script>

@@ -10,7 +10,7 @@
         :disabled="busy"
       />
       <h4 class="float-left mb-0 mt-2">{{ $t('wifi.accesspoint.title') }}</h4>
-      <icon class="switch-icon" name="refresh" v-if="busy" pulse/>
+      <icon class="switch-icon" name="sync" v-if="busy" pulse/>
     </b-card-header>
     <b-card-body>
       <div class="small" v-html="$t('wifi.accesspoint.description')"></div>

@@ -2,12 +2,12 @@
   <b-card no-body bg-variant="dark" text-variant="white">
     <b-card-header class="clearfix">
       <action-button
-        ref="refresh"
-        icon="refresh"
+        ref="sync"
+        icon="sync"
         class="float-left text-light pr-3 mt-1 mb-0"
         color="dark"
         pulse-hover="true"
-        :title="$t('medias.refresh')"
+        :title="$t('medias.sync')"
       />
       <h4 class="float-left mb-0 mt-2">{{ $t('medias.mounts.title') }}</h4>
     </b-card-header>
@@ -49,24 +49,24 @@ export default {
     }
   },
   mounted () {
-    this.$refs.refresh.$on('click', e => {
+    this.$refs.sync.$on('click', e => {
       this.$store.dispatch('medias')
     })
   },
   methods: {
-    refreshMedias () {
+    syncMedias () {
       try {
-        const baseClass = this.$refs.refreshButton.className
-        this.$refs.refreshButton.className = baseClass + ' btn-pulse'
-        this.$refs.refreshButton.setAttribute('disabled', true)
+        const baseClass = this.$refs.syncButton.className
+        this.$refs.syncButton.className = baseClass + ' btn-pulse'
+        this.$refs.syncButton.setAttribute('disabled', true)
         this.$store.dispatch('medias')
           .then(mounts => {
-            this.$refs.refreshButton.removeAttribute('disabled')
-            this.$refs.refreshButton.className = baseClass
+            this.$refs.syncButton.removeAttribute('disabled')
+            this.$refs.syncButton.className = baseClass
           })
           .catch(error => {
-            this.$refs.refreshButton.removeAttribute('disabled')
-            this.$refs.refreshButton.className = baseClass
+            this.$refs.syncButton.removeAttribute('disabled')
+            this.$refs.syncButton.className = baseClass
             console.log(error)
           })
       } catch (error) {
