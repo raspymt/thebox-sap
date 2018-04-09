@@ -59,7 +59,6 @@ module.exports = {
       'vue-awesome/icons/globe',
       'vue-awesome/icons/user',
       'vue-awesome/icons/power-off',
-      // 'vue-awesome/icons/refresh',
       'vue-awesome/icons/sync',
       'vue-awesome/icons/lock',
       'vue-awesome/icons/signal',
