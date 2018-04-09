@@ -89,7 +89,7 @@
     "title": "Applications",
     "mpd": {
       "title": "MPD",
-      "description": "<p>Listen to your music on The Box. You can find informations on MPD <a href=\"https://en.wikipedia.org/wiki/Music_Player_Daemon\" target=\"_blank\">here</a>.<p><p>You'll need an MPD client to control the music. There are many available MPD clients for Android, IOS or for your computer. For Android I recommend <a href=\"https://play.google.com/store/apps/details?id=com.namelessdev.mpdroid\" target=\"_blank\">MPDroid</a>, it's free.</p><p>As an alternative you can enable the MPD GUI to control the music from your browser.</p>"
+      "description": "<p>Listen to your music on The Box. You can find informations on MPD <a href=\"https://en.wikipedia.org/wiki/Music_Player_Daemon\" target=\"_blank\">here</a>.<p><p>You'll need an MPD client to control the music. There are many available MPD clients for Android, IOS or for your computer. For Android I recommend <a href=\"https://play.google.com/store/apps/details?id=com.namelessdev.mpdroid\" target=\"_blank\">MPDroid</a>, it's free.</p>"
     },
     "mpdgui": {
       "title": "MPD GUI",

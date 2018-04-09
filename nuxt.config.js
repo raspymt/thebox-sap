@@ -51,7 +51,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    buildDir: '../thebox-api/dist/',
+    // buildDir: '../thebox-api/dist/',
     analyze: { analyzerMode: 'static' },
     extractCSS: true,
     ssr: false,
@@ -80,28 +80,29 @@ module.exports = {
       }
     }
   },
-  // generate: {
-  //   minify: {
-  //     collapseBooleanAttributes: true,
-  //     collapseWhitespace: true,
-  //     decodeEntities: true,
-  //     minifyCSS: true,
-  //     minifyJS: true,
-  //     processConditionalComments: true,
-  //     removeAttributeQuotes: true,
-  //     removeComments: true,
-  //     removeEmptyAttributes: true,
-  //     removeOptionalTags: true,
-  //     removeRedundantAttributes: true,
-  //     removeScriptTypeAttributes: false,
-  //     removeStyleLinkTypeAttributes: false,
-  //     removeTagWhitespace: true,
-  //     sortAttributes: true,
-  //     sortClassName: true,
-  //     trimCustomFragments: true,
-  //     useShortDoctype: true
-  //   }
-  // },
+  generate: {
+    dir: '../thebox-api/dist/',
+    minify: {
+      collapseBooleanAttributes: true,
+      collapseWhitespace: true,
+      decodeEntities: true,
+      minifyCSS: true,
+      minifyJS: true,
+      processConditionalComments: true,
+      removeAttributeQuotes: true,
+      removeComments: true,
+      removeEmptyAttributes: true,
+      removeOptionalTags: true,
+      removeRedundantAttributes: true,
+      removeScriptTypeAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      removeTagWhitespace: true,
+      sortAttributes: true,
+      sortClassName: true,
+      trimCustomFragments: true,
+      useShortDoctype: true
+    }
+  },
   router: {
     // middleware: ['check-auth', 'i18n']
     middleware: ['i18n']
