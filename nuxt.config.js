@@ -51,6 +51,7 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    buildDir: '../thebox-api/dist/',
     analyze: { analyzerMode: 'static' },
     extractCSS: true,
     ssr: false,
