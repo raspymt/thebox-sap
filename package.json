@@ -1,9 +1,13 @@
 {
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:raspymt/thebox-sap.git"
+  },
   "name": "the-box-web-management",
-  "version": "1.0.0",
-  "description": "The Box web management",
-  "author": "Yves-Marie Trublin <yvestrublin@gmail.com>",
-  "private": true,
+  "version": "0.0.1",
+  "description": "The Box SAP web management",
+  "author": "Yves-Marie Trublin <yvestrublin@protonmail.com>",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
