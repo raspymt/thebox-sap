@@ -52,7 +52,7 @@ module.exports = {
   */
   build: {
     // buildDir: '../thebox-api/dist/',
-    analyze: { analyzerMode: 'static' },
+    // analyze: { analyzerMode: 'static' },
     extractCSS: true,
     ssr: false,
     vendor: [
