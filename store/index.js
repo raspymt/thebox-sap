@@ -44,6 +44,10 @@ export const state = () => ({
     accesspoint: {
       active: false,
       busy: false
+    },
+    cloudstorage: {
+      active: false,
+      busy: false
     }
   }
 })

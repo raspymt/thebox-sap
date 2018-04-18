@@ -14,6 +14,9 @@
       <b-col lg="4" md="6" sm="12" class="pt-3">
         <file-sharing class="h-100"/>
       </b-col>
+      <b-col lg="4" md="6" sm="12" class="pt-3">
+        <cloud-storage class="h-100"/>
+      </b-col>
     </b-row>
     <!-- <b-card-group columns>
       <mpd/>
@@ -31,6 +34,7 @@ import Mpd from '~/components/applications/Mpd.vue'
 import FileSharing from '~/components/applications/FileSharing.vue'
 import Torrents from '~/components/applications/Torrents.vue'
 import UpnpDlna from '~/components/applications/UpnpDlna.vue'
+import CloudStorage from '~/components/applications/CloudStorage.vue'
 
 export default {
   middleware: 'authenticated',
@@ -42,7 +46,8 @@ export default {
         mpdgui: config.mpdgui,
         filesharing: config.filesharing,
         upnpdlna: config.upnpdlna,
-        torrents: config.torrents
+        torrents: config.torrents,
+        cloudstorage: config.cloudstorage
       })
     } catch (e) {
       console.log(e)
@@ -53,7 +58,8 @@ export default {
     FileSharing,
     Mpd,
     Torrents,
-    UpnpDlna
+    UpnpDlna,
+    CloudStorage
   },
   head () {
     return { title: this.$t('applications.title') }

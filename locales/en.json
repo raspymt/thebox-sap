@@ -128,6 +128,11 @@
       "title": "UPNP / DLNA",
       "description": "<p>Play your media on your external devices. You can find informations about UPNP <a href=\"https://en.wikipedia.org/wiki/Universal_Plug_and_Play\" target=\"_blank\">here</a> and DLNA <a href=\"https://en.wikipedia.org/wiki/Digital_Living_Network_Alliance\" target=\"_blank\">here</a>.</p><p>You can access your media with VLC or there is plenty of software that can access UPNP/DLNA server.</p>",
       "link": "Click <a href=\"http://thebox:8200\" target=\"_blank\">here</a> to check UPNP/DLNA status."
+    },
+    "cloudstorage": {
+      "title": "Seafile",
+      "description": "<p>Sync and share files across your devices. You can find informations about Seafile <a href=\"https://www.seafile.com\" target=\"_blank\">here</a>.</p>",
+      "link": "Click <a href=\"http://thebox:8000\" target=\"_blank\">here</a> to manage your Seafile server."
     }
   },
   "user": {

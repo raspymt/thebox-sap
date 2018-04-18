@@ -1,5 +1,5 @@
 module.exports = {
-  browserBaseURL: 'http://thebox:80/api/v1/',
+  browserBaseURL: 'http://thebox/api/v1/',
   baseURL: 'http://localhost:3000/',
   /*
   ** The Box API
@@ -28,6 +28,9 @@ module.exports = {
     accesspoint: {
       // service: 'wpa_supplicant@uap0.service'
       service: 'hostapd.service'
+    },
+    cloudstorage: {
+      service: 'seafile-server@thebox.service'
     }
   }
 }
