@@ -32,7 +32,7 @@ module.exports = {
   ** CSS
   */
   css: [
-    '@/assets/styles/bootstrap.scss',
+    // '@/assets/styles/bootstrap.scss',
     '@/assets/styles/switch.scss',
     '@/assets/styles/action-button.scss',
     '@/assets/styles/style.scss'
@@ -56,6 +56,15 @@ module.exports = {
     extractCSS: true,
     ssr: false,
     vendor: [
+      'vue-awesome/icons/chevron-right',
+      'vue-awesome/icons/arrow-circle-up',
+      'vue-awesome/icons/plus-circle',
+      'vue-awesome/icons/hdd',
+      'vue-awesome/icons/external-link-square-alt',
+      'vue-awesome/icons/database',
+      'vue-awesome/icons/question-circle',
+      'vue-awesome/icons/plus-square',
+      'vue-awesome/icons/minus-square',
       'vue-awesome/icons/stop',
       'vue-awesome/icons/globe',
       'vue-awesome/icons/user',
@@ -64,7 +73,18 @@ module.exports = {
       'vue-awesome/icons/lock',
       'vue-awesome/icons/signal',
       'vue-awesome/icons/eject',
-      'vue-awesome/icons/key'
+      'vue-awesome/icons/key',
+      'vue-awesome/icons/circle',
+      'vue-awesome/icons/circle-notch',
+      'vue-awesome/icons/square',
+      'vue-awesome/icons/times-circle',
+      'vue-awesome/icons/check-circle',
+      'vue-awesome/icons/check-square',
+      'vue-awesome/icons/check',
+      'vue-awesome/icons/folder',
+      'vue-awesome/icons/plus',
+      'vue-awesome/icons/level-up-alt',
+      'vue-awesome/icons/home'
     ],
     /*
     ** Run ESLint on save

@@ -16,7 +16,7 @@ export default {
     LoginForm
   },
   head () {
-    return { title: this.$t('login.title') }
+    return { title: `${this.$t('title')} - ${this.$t('login.title')}` }
   },
   mounted () {
     this.$store.commit('SET_PAGE', 'login')

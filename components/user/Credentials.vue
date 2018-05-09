@@ -1,7 +1,7 @@
 <template>
   <b-card no-body bg-variant="dark" text-variant="white">
     <b-card-header class="clearfix">
-      <h4 class="float-left mb-0 mt-2">{{ $t('user.credentials.title') }}</h4>
+      <h4 class="card-title">{{ $t('user.credentials.title') }}</h4>
       <icon class="switch-icon" name="sync" v-if="busy" pulse/>
     </b-card-header>
     <b-card-body>
@@ -69,7 +69,6 @@
             v-model.trim="formRepeatPassword"
             :state="repeatPasswordState"
             required
-            class="mt-2"
           ></b-form-input>
         </b-form-group>
         

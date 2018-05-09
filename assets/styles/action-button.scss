@@ -26,7 +26,8 @@ $icon-size: 12px;
     position: relative;
     display: inline-block;
 
-    border-radius: 30px;
+    // border-radius: 30px;
+    border-radius: 7px;
     border: none;
     margin: 0;
     padding: 0;
@@ -85,7 +86,7 @@ $icon-size: 12px;
   @each $colorName, $color in $theme-colors {
     &.vue-action-button-color--#{$colorName} {
       & > span {
-        border: 3px solid lighten($color, 20%);
+        border: 4px solid lighten($color, 20%);
         background-color: $color;        
       }
 

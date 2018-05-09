@@ -6,7 +6,7 @@
 <script>
 export default {
   head () {
-    return { title: this.$t('logout.title') }
+    return { title: `${this.$t('title')} - ${this.$t('logout.title')}` }
   },
   mounted () {
     this.$store.dispatch('logout')

@@ -97,6 +97,36 @@
     }
   }
 
+  &--small {
+     div {
+      height: 21px;
+      width: 33px;
+      &:after {
+        height: 15px;
+        width: 15px;
+        // margin-left: -28px;
+        // top: 2px;
+        // box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    &.vue-switcher--bold {
+      div {
+        &:after {
+          margin-left: -18px;
+        }
+      }
+
+      &--unchecked {
+        div {
+          &:after {
+            left: 21px;
+          }
+        }
+      }
+    }
+  }
+
   @each $colorName, $color in $theme-colors {
     &.vue-switcher-color--#{$colorName} {
       div {

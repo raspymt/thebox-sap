@@ -1,6 +1,15 @@
 import jwtDecode from 'jwt-decode'
 import { setToken, unsetToken } from '~/utils/auth'
 
+const api = require('../thebox.config.js').api
+
+/**
+ * Helpers
+ */
+const encodeParams = (action, params = {}) => {
+  return { params: { s: window.btoa(JSON.stringify({...params, action: action})) } }
+}
+
 export const state = () => ({
   locales: ['en', 'fr'],
   locale: 'en',
@@ -13,9 +22,9 @@ export const state = () => ({
   // },
   token: false,
   page: 'index',
-  networks: [],
-  networkStatus: {},
-  medias: [],
+  wifiNetworks: [],
+  wifiStatus: {},
+  medias: {},
   services: {
     mpd: {
       active: false,
@@ -26,6 +35,7 @@ export const state = () => ({
       busy: false
     },
     upnpdlna: {
+      rebuilding: false,
       active: false,
       busy: false
     },
@@ -33,21 +43,25 @@ export const state = () => ({
       active: false,
       busy: false
     },
-    torrents: {
+    torrent: {
       active: false,
-      busy: false
+      busy: false,
+      username: ''
     },
-    networks: {
+    wifi: {
       active: false,
       busy: false
     },
     accesspoint: {
       active: false,
-      busy: false
+      busy: false,
+      ssid: ''
     },
     cloudstorage: {
       active: false,
-      busy: false
+      busy: false,
+      // default seafile data directory
+      storageFolder: '/srv/seafile/thebox/seafile-data'
     }
   }
 })
@@ -59,10 +73,22 @@ export const mutations = {
     }
   },
   SET_STATUS_SERVICE: (state, data) => {
-    state.services[data.service].active = data.active
-    if (data.busy !== undefined) {
-      state.services[data.service].busy = data.busy
-    }
+    // if (data.active !== undefined) {
+    //   state.services[data.service].active = data.active
+    // }
+    // if (data.busy !== undefined) {
+    //   state.services[data.service].busy = data.busy
+    // }
+    Object.keys(data.data).forEach(function (key) {
+      state.services[data.service][key] = data.data[key]
+    })
+  },
+  SET_STATUSES_SERVICE: (state, data) => {
+    Object.keys(data).forEach(function (key) {
+      Object.keys(data[key]).forEach(function (k) {
+        state.services[key][k] = data[key][k]
+      })
+    })
   },
   SET_PAGE: (state, page) => {
     state.page = page
@@ -73,12 +99,12 @@ export const mutations = {
   SET_TOKEN: (state, token) => {
     state.token = token
   },
-  SET_NETWORK_STATUS: (state, status) => {
-    state.networkStatus = status
+  SET_WIFI_STATUS: (state, status) => {
+    state.wifiStatus = status
   },
-  SET_NETWORKS: (state, networks) => {
-    state.networks = networks.map(e => {
-      if (e.ssid === state.networkStatus.ssid) {
+  SET_WIFI_NETWORKS: (state, networks) => {
+    state.wifiNetworks = networks.map(e => {
+      if (e.ssid === state.wifiStatus.ssid) {
         e.connected = true
       }
       return e
@@ -139,7 +165,7 @@ export const actions = {
   async updateUser ({ commit }, { id, username, password }) {
     try {
       const data = await this.$axios.$put(
-        `users/${id}`,
+        api.users.update + id,
         { credentials: 'UpdateUser ' + window.btoa(`${username}:${password}`) }
       )
       return data
@@ -149,32 +175,14 @@ export const actions = {
     }
   },
 
-  async updateFileSharingPassword ({ commit }, { password }) {
-    try {
-      const data = await this.$axios.$post(
-        require('../thebox.config.js').api.filesharing.updatePassword,
-        { credentials: 'UpdatePassword ' + window.btoa(password) }
-      )
-      return data
-    } catch (error) {
-      console.log(error)
-      throw new Error(this.app.i18n.t('errors.credentials'))
-    }
-  },
+  /**
+   * RPC
+   */
 
-  async statuses ({ commit }, services) {
+  async statuses ({ commit }) {
     try {
-      const { statuses } = await this.$axios.$get('services/statuses', {
-        headers: {
-          services: JSON.stringify(services)
-        }
-      })
-      for (var status in statuses) {
-        commit('SET_STATUS_SERVICE', {
-          service: status,
-          active: statuses[status]
-        })
-      }
+      const statuses = await this.$axios.$get(api.rpc, encodeParams('statuses'))
+      commit('SET_STATUSES_SERVICE', statuses)
       return statuses
     } catch (error) {
       console.log(error)
@@ -182,36 +190,81 @@ export const actions = {
     }
   },
 
-  async enableDisableNow ({ commit }, options) {
-    const { name, enable } = options
-    const service = require('../thebox.config').api[name].service
-    const action = enable ? 'enableNow' : 'disableNow'
-    commit('SET_STATUS_SERVICE', { service: name, active: !enable, busy: true })
+  async startStopService ({ commit }, { name, enable }) {
+    const startStop = enable ? 'start' : 'stop'
     try {
-      const { data } = await this.$axios.$post('services/action', null, {
-        headers: { service: service, action: action }
-      })
-      if (data.success) {
-        commit('SET_STATUS_SERVICE', { service: name, active: enable, busy: false })
-        return enable
-      } else {
-        throw new Error(this.app.$i18n.t('errors.service'))
+      commit('SET_STATUS_SERVICE', { service: name, data: { busy: true } })
+      const success = await this.$axios.$post(api.rpc, encodeParams(api[`${startStop}Service`], { service: api[name] }))
+      if (success) {
+        commit('SET_STATUS_SERVICE', { service: name, data: { active: enable, busy: false } })
       }
     } catch (error) {
       console.log(error)
-      commit('SET_STATUS_SERVICE', {
-        service: name,
-        active: !enable,
-        busy: false
-      })
+      commit('SET_STATUS_SERVICE', { service: name, data: { active: !enable, busy: false } })
+      throw new Error(this.app.i18n.t(`errors.${name}.${startStop}`))
     }
   },
 
-  async networks ({ commit }, iface) {
+  async updateFileSharingPassword ({ commit }, password) {
     try {
-      const { networks, status } = await this.$axios.$get('networks', { headers: { interface: iface } })
-      commit('SET_NETWORK_STATUS', status)
-      commit('SET_NETWORKS', networks)
+      return this.$axios.$post(api.rpc, encodeParams(api.filesharingCredentials, { credentials: 'UpdatePassword ' + window.btoa(password) }))
+    } catch (error) {
+      console.log(error)
+      throw new Error(this.app.i18n.t('errors.filesharing.password.update'))
+    }
+  },
+
+  async updateMPDPassword ({ commit }, password) {
+    try {
+      return this.$axios.$post(api.rpc, encodeParams(api.mpdCredentials, { credentials: 'UpdatePassword ' + window.btoa(password) }))
+    } catch (error) {
+      console.log(error)
+      throw new Error(this.app.i18n.t('errors.mpd.password.update'))
+    }
+  },
+
+  async updateTorrentCredentials ({ commit }, { username, password }) {
+    try {
+      return this.$axios.$post(api.rpc, encodeParams(api.torrentCredentials, { credentials: 'UpdateCredentials ' + window.btoa(`${username}:${password}`) }))
+    } catch (error) {
+      console.log(error)
+      throw new Error(this.app.i18n.t('errors.torrent.credentials.update'))
+    }
+  },
+
+  async rescanUpnpDlna ({ commit }) {
+    try {
+      const success = await this.$axios.$post(api.rpc, encodeParams(api.startService, { service: api.upnpdlnaRescan }))
+      commit('SET_STATUS_SERVICE', { service: 'upnpdlna', data: { busy: true } })
+      if (success) {
+        commit('SET_STATUS_SERVICE', { service: 'upnpdlna', data: { rescanning: true, busy: false } })
+      }
+    } catch (error) {
+      console.log(error)
+      commit('SET_STATUS_SERVICE', { service: 'upnpdlna', data: { busy: false } })
+      throw new Error(this.app.i18n.t('errors.upnpdlna.rescan'))
+    }
+  },
+
+  async rebuildUpnpDlna ({ commit }) {
+    try {
+      const success = await this.$axios.$post(api.rpc, encodeParams(api.startService, { service: api.upnpdlnaRebuild }))
+      commit('SET_STATUS_SERVICE', { service: 'upnpdlna', data: { busy: true } })
+      if (success) {
+        commit('SET_STATUS_SERVICE', { service: 'upnpdlna', data: { rebuilding: true, busy: false } })
+      }
+    } catch (error) {
+      console.log(error)
+      commit('SET_STATUS_SERVICE', { service: 'upnpdlna', data: { busy: false } })
+      throw new Error(this.app.i18n.t('errors.upnpdlna.rebuild'))
+    }
+  },
+
+  async wifiNetworks ({ commit }) {
+    try {
+      const { networks, status } = await this.$axios.$get(api.rpc, encodeParams(api.networks))
+      commit('SET_WIFI_STATUS', status)
+      commit('SET_WIFI_NETWORKS', networks)
       return networks
     } catch (error) {
       console.log(error)
@@ -221,28 +274,45 @@ export const actions = {
 
   async medias ({ commit }) {
     try {
-      const { mounts } = await this.$axios.$get('medias')
-      commit('SET_MEDIAS', mounts)
-      return mounts
+      const medias = await this.$axios.$get(api.rpc, encodeParams(api.medias))
+      commit('SET_MEDIAS', medias)
+      return medias
     } catch (error) {
       console.log(error)
       throw new Error(this.app.i18n.t('errors.medias.list'))
     }
   },
 
+  async listDirectories ({ commit }, directory) {
+    try {
+      return this.$axios.$get(api.rpc, encodeParams(api.listDirectories, { directory: directory }))
+    } catch (error) {
+      console.log(error)
+      throw new Error(this.app.i18n.t('errors.directories.list'))
+    }
+  },
+
+  async createCloudStorageDirectory ({ commit }, directory) {
+    try {
+      return this.$axios.$post(api.rpc, encodeParams(api.createCloudStorageDirectory, { directory: directory }))
+    } catch (error) {
+      console.log(error)
+      throw new Error(this.app.i18n.t('errors.directories.create'))
+    }
+  },
+
+  async setCloudStorageDirectory ({ commit }, { directory, recovery }) {
+    try {
+      return this.$axios.$post(api.rpc, encodeParams(api.setCloudStorageDirectory, { directory: directory, recovery: recovery }))
+    } catch (error) {
+      console.log(error)
+      throw new Error(this.app.i18n.t('errors.cloudstoorage.setstorage'))
+    }
+  },
+
   async unmount ({ commit }, media) {
     try {
-      const { data } = await this.$axios.$post('services/action', null, {
-        headers: {
-          service: `usb-mount@${media}.service`,
-          action: 'stop'
-        }
-      })
-      if (data.success) {
-        return true
-      } else {
-        throw new Error(this.app.i18n.t('errors.medias.unmount'))
-      }
+      return this.$axios.$post(api.rpc, encodeParams(api.unmount, { media: media }))
     } catch (error) {
       console.log(error)
       throw new Error(this.app.i18n.t('errors.medias.unmount'))
@@ -251,11 +321,7 @@ export const actions = {
 
   async poweroff ({ commit }) {
     try {
-      await this.$axios.$post('services/action', null, {
-        headers: {
-          action: 'poweroff'
-        }
-      })
+      await this.$axios.$post(api.rpc, encodeParams(api.poweroff))
     } catch (error) {
       console.log(error)
       throw new Error(this.app.i18n.t('errors.service.poweroff'))
@@ -264,11 +330,7 @@ export const actions = {
 
   async reboot ({ commit }) {
     try {
-      await this.$axios.$post('services/action', null, {
-        headers: {
-          action: 'reboot'
-        }
-      })
+      await this.$axios.$post(api.rpc, encodeParams(api.reboot))
     } catch (error) {
       console.log(error)
       throw new Error(this.app.i18n.t('errors.service.reboot'))

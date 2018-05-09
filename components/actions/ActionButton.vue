@@ -54,6 +54,9 @@ export default {
         e.currentTarget.blur()
         this.$emit('click', e.currentTarget)
       }
+    },
+    setDisabled (disabled) {
+      this.disabled = true
     }
   },
   computed: {
@@ -62,7 +65,7 @@ export default {
       return {
         'vue-action-button': true,
         'vue-action-button--disabled': disabled,
-        'vue-action-button--pulse': pulse && !disabled,
+        'vue-action-button--pulse': pulse,
         'vue-action-button--pulse-hover': pulseHover && !disabled,
         [`vue-action-button-color--${color}`]: color
       }

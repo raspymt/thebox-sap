@@ -5,32 +5,36 @@ module.exports = {
   ** The Box API
   */
   api: {
-    mpd: {
-      service: 'mpd.service'
+    rpc: 'rpc',
+    users: {
+      update: 'users/'
     },
-    mpdgui: {
-      service: 'ympd.service'
+    service: {
+      statuses: 'services/statuses',
+      action: 'services/action'
     },
-    filesharing: {
-      service: 'smbd.service',
-      updatePassword: 'samba/update/password'
-    },
-    torrents: {
-      service: 'transmission.service'
-    },
-    upnpdlna: {
-      service: 'minidlna.service'
-    },
-    networks: {
-      service: 'wpa_supplicant@wlan0.service',
-      interface: 'wlan0'
-    },
-    accesspoint: {
-      // service: 'wpa_supplicant@uap0.service'
-      service: 'hostapd.service'
-    },
-    cloudstorage: {
-      service: 'seafile-server@thebox.service'
-    }
+    mpd: 'mpd',
+    mpdgui: 'mpdgui',
+    mpdCredentials: 'mpdCredentials',
+    filesharing: 'filesharing',
+    filesharingCredentials: 'filesharingCredentials',
+    torrent: 'torrent',
+    torrentCredentials: 'torrentCredentials',
+    upnpdlna: 'upnpdlna',
+    upnpdlnaRebuild: 'rebuildUpnpDlna',
+    upnpdlnaRescan: 'rescanUpnpDlna',
+    cloudstorage: 'cloudstorage',
+    startService: 'startService',
+    stopService: 'stopService',
+    medias: 'medias',
+    poweroff: 'poweroff',
+    reboot: 'reboot',
+    unmount: 'unmount',
+    wifi: 'wifi',
+    accesspoint: 'accesspoint',
+    networks: 'networks',
+    listDirectories: 'listDirectories',
+    createCloudStorageDirectory: 'createCloudStorageDirectory',
+    setCloudStorageDirectory: 'setCloudStorageDirectory'
   }
 }
