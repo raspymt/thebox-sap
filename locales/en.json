@@ -1,4 +1,5 @@
 {
+  "title": "The Box",
   "on": "On",
   "off": "Off",
   "system": {
@@ -23,6 +24,28 @@
       "disablenow": "Error disabling/stopping the service.",
       "poweroff": "Error during shutdown The Box.",
       "reboot": "Error restarting The Box."
+    },
+    "statuses": "There has been an error retriving applcation statuses."
+  },
+  "credentials": {
+    "submit": "Submit",
+    "success": "Credentials updated successfully.",
+    "successpassword": "Password updated successfully.",
+    "username": {
+      "title": "Username",
+      "description": "Enter your new username.",
+      "feedback": {
+        "not_empty": "Your username must be at least 3 characters long."
+      }
+    },
+    "password": {
+      "title": "Password",
+      "description": "Enter your new password.",
+      "repeat": "Repeat Password",
+      "feedback": {
+        "not_empty": "Your password must be at least 7 characters long.",
+        "password_no_match": "Passwords do not match."
+      }
     }
   },
   "links": {
@@ -44,14 +67,12 @@
     "form": {
       "username": {
         "feedback": {
-          "empty": "Please enter your username",
-          "not_empty": "Your username must be at least 4 characters long."
+          "empty": "Please enter your username"
         }
       },
       "password": {
         "feedback": {
-          "empty": "Please enter your password",
-          "not_empty": "Your password must be at least 7 characters long."
+          "empty": "Please enter your password"
         }
       }
     }
@@ -89,50 +110,76 @@
     "title": "Applications",
     "mpd": {
       "title": "MPD",
-      "description": "<p>Listen to your music on The Box. You can find informations on MPD <a href=\"https://en.wikipedia.org/wiki/Music_Player_Daemon\" target=\"_blank\">here</a>.<p><p>You'll need an MPD client to control the music. There are many available MPD clients for Android, IOS or for your computer. For Android I recommend <a href=\"https://play.google.com/store/apps/details?id=com.namelessdev.mpdroid\" target=\"_blank\">MPDroid</a>, it's free.</p>"
+      "description": "<p>Listen to your music on The Box. You can find informations on MPD <a href=\"https://en.wikipedia.org/wiki/Music_Player_Daemon\" target=\"_blank\">here</a>.<p><p>You'll need an MPD client to control the music. There are many available MPD clients for Android, IOS or for your computer. For Android I recommend <a href=\"https://play.google.com/store/apps/details?id=com.namelessdev.mpdroid\" target=\"_blank\">MPDroid</a>, it's free.</p>",
+      "password": {
+        "open": "Password update",
+        "close": "Hide password update",
+        "help": "Update your MPD password."
+      }
     },
     "mpdgui": {
       "title": "MPD GUI",
-      "description": "Control MPD from your browser.",
-      "link": "Click <a href=\"http://thebox:8080\" target=\"_blank\">here</a> ot access the MPD GUI."
+      "link": "http://thebox:8080",
+      "linkhelp": "Control your music from your browser."
     },
     "filesharing": {
       "title": "Sharing",
-      "description": "<p>Share your USB disks over your local network.</p><p>The username is 'thebox'.</p>",
+      "description": "<p>Share your USB disks over your local network.</p>",
       "password": {
-        "close": "Hide password change",
-        "open": "Change password"
-      },
-      "credentials": {
-        "title": "File Sharing password",
-        "description": "<p>Change your file sharing password.</p>",
-        "submit": "Submit",
-        "success": "Password changed successfully.",
-        "password": {
-          "title": "Password",
-          "description": "Enter your new password.",
-          "repeat": "Repeat Password",
-          "feedback": {
-            "not_empty": "Your password must be at least 7 characters long.",
-            "password_no_match": "Passwords do not match."
-          }
-        }
+        "open": "Password update",
+        "close": "Hide password update",
+        "help": "Update your network shares password. The user to connect to your shares is 'thebox'."
       }
     },
-    "torrents": {
+    "torrent": {
       "title": "Torrents",
       "description": "<p>Torrents download manager.</p>",
-      "link": "Click <a href=\"http://thebox:9091\" target=\"_blank\">here</a> to manage your torrents."
+      "link": "http://thebox:9091",
+      "linkhelp": "Manage your torrents.",
+      "credentials": {
+        "open": "Credentials update",
+        "close": "Hide crendentials update",
+        "help": "Update your username and password to manage your torrents."
+      }
     },
     "upnpdlna": {
       "title": "UPNP / DLNA",
       "description": "<p>Play your media on your external devices. You can find informations about UPNP <a href=\"https://en.wikipedia.org/wiki/Universal_Plug_and_Play\" target=\"_blank\">here</a> and DLNA <a href=\"https://en.wikipedia.org/wiki/Digital_Living_Network_Alliance\" target=\"_blank\">here</a>.</p><p>You can access your media with VLC or there is plenty of software that can access UPNP/DLNA server.</p>",
-      "link": "Click <a href=\"http://thebox:8200\" target=\"_blank\">here</a> to check UPNP/DLNA status."
+      "link": "http://thebox:8200",
+      "linkhelp": "Check UPNP/DLNA status.",
+      "rescan": "Rescan medias",
+      "rescanning": "Rescanning medias...",
+      "rescanhelp": "Rescan your medias if you added some USB devices and you cannot find their medias in your library.",
+      "rebuild": "Rebuild medias database",
+      "rebuilding": "Rebuilding medias database...",
+      "rebuildhelp": "If you cannot find your library or experience trouble connecting the service, rebuild your medias database can help. It could take a long time if you have a lot of disks connected."
     },
     "cloudstorage": {
-      "title": "Seafile",
-      "description": "<p>Sync and share files across your devices. You can find informations about Seafile <a href=\"https://www.seafile.com\" target=\"_blank\">here</a>.</p>",
-      "link": "Click <a href=\"http://thebox:8000\" target=\"_blank\">here</a> to manage your Seafile server."
+      "title": "Cloud storage",
+      "description": "<p>Sync and share files across your devices. The Box use <a href=\"https://www.seafile.com\" target=\"_blank\">Seafile</a> as the cloud storage server.</p>",
+      "link": "http://thebox:8000",
+      "linkhelp": "Manage your cloud storage server.",
+      "storage": {
+        "help": "Change your storage location to another disk or directory. It could take a long time if you have a lot of files and you change the location to another disk. Check recovery mode to recover from an old storage location.",
+        "open": "Storage location update",
+        "close": "Hide storage location update",
+        "storagefolder": "Current Seafile data folder: ",
+        "currentfolder": "Current folder:",
+        "createfolder": "Create folder",
+        "selectfolder": "Select folder",
+        "upfolder": "Up a folder",
+        "emptydir": "Folder is empty, you can select it to store your cloud data.",
+        "recoverymode": "Recovery",
+        "recoverymodehelp": "Recovery mode",
+        "storagerecovery": "You can select it to store your cloud data.",
+        "createfolderinput": "New folder name",
+        "createfolderinputvalidate": "Confirm folder creation",
+        "createfolderinputempty": "Folder cannot be empty.",
+        "error": {
+          "exist": "Folder already exists.",
+          "empty": "Folder cannot be empty."
+        }
+      }
     }
   },
   "user": {

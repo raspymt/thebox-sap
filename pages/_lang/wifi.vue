@@ -39,7 +39,7 @@ export default {
     AccessPoint
   },
   head () {
-    return { title: this.$t('wifi.title') }
+    return { title: `${this.$t('title')} - ${this.$t('wifi.title')}` }
   },
   mounted () {
     this.$store.commit('SET_PAGE', 'wifi')

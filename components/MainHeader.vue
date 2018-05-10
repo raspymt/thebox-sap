@@ -11,11 +11,11 @@
 
       <b-collapse is-nav id="nav_collapse">
 
-        <b-navbar-nav v-if="isAuthenticated">
+        <!-- <b-navbar-nav v-if="isAuthenticated">
           <b-nav-item :to="path('/applications')" exact>{{ $t('links.applications') }}</b-nav-item>
           <b-nav-item :to="path('/wifi')" exact>{{ $t('links.wifi') }}</b-nav-item>
           <b-nav-item :to="path('/medias')" exact>{{ $t('links.medias') }}</b-nav-item>
-        </b-navbar-nav>
+        </b-navbar-nav> -->
 
         <b-navbar-nav class="ml-auto">
           

@@ -1,5 +1,5 @@
 <template>
-  <div class="position-relative mt-2">
+  <div class="position-relative mt-2 border p-1">
     <icon class="switch-icon__absolute" name="sync" v-if="busy" pulse/>
     <b-form @submit.prevent="updatePassword">
       <transition name="slide">
@@ -12,12 +12,8 @@
           {{ formAlert }}
         </b-alert>
       </transition>
-      <form-repeat-password
-        ref="repeatPassword"
-        :placeholderPassword="$t('applications.filesharing.credentials.password.title')"
-        :placeholderRepeatPassword="$t('applications.filesharing.credentials.password.repeat')"
-      />      
-      <b-button type="submit" variant="light" :disabled="disabledSubmit">{{ $t('applications.filesharing.credentials.submit') }}</b-button>
+      <form-repeat-password ref="repeatPassword"/>
+      <b-button type="submit" variant="light" :disabled="disabledSubmit">{{ $t('credentials.submit') }}</b-button>
     </b-form>
   </div>
 </template>
@@ -56,14 +52,12 @@ export default {
     async updatePassword () {
       try {
         this.busy = true
-        const result = await this.$store.dispatch('updateFileSharingPassword', {
-          password: this.$refs.repeatPassword.formPassword
-        })
+        const result = await this.$store.dispatch('updateFileSharingPassword', this.$refs.repeatPassword.formPassword)
         this.$refs.repeatPassword.clear()
         this.formAlert = null
-        if (result.success === true) {
+        if (result === true) {
           this.alertVariant = 'success'
-          this.formAlert = this.$i18n.t('applications.filesharing.credentials.success')
+          this.formAlert = this.$i18n.t('credentials.successpassword')
           this.alertShow()
         } else {
           this.alertVariant = 'warning'

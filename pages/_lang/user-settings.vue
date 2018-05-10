@@ -20,7 +20,7 @@ export default {
     Credentials
   },
   head () {
-    return { title: this.$t('user.title') }
+    return { title: `${this.$t('title')} - ${this.$t('user.title')}` }
   },
   mounted () {
     this.$store.commit('SET_PAGE', 'user')

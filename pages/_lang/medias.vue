@@ -26,7 +26,7 @@ export default {
     store.dispatch('medias')
   },
   head () {
-    return { title: this.$t('medias.title') }
+    return { title: `${this.$t('title')} - ${this.$t('medias.title')}` }
   },
   mounted () {
     this.$store.commit('SET_PAGE', 'medias')

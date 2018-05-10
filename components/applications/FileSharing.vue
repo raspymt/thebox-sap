@@ -3,41 +3,49 @@
     <b-card-header class="clearfix">
       <switcher
         ref="filesharingSwitch"
-        class="float-left pr-3 mt-3 mb-0"
         color="dark"
         typeBold="true"
         :checked="active"
         :disabled="busy"
       />
-      <h4 class="float-left mb-0 mt-2">{{ $t('applications.filesharing.title') }}</h4>
-      <icon class="switch-icon" name="sync" v-if="busy" pulse/>
+      <h4 class="card-title">{{ $t('applications.filesharing.title') }}</h4>
+      <collapse-card-button v-b-toggle.collapse-filesharing/>
+      <div v-if="busy" class="card-header-progress"></div>
     </b-card-header>
-    <b-card-body>
-      <div class="small" v-html="$t('applications.filesharing.description')"></div>
-      <action-button
-        v-b-toggle.collapsePassword
-        icon="key"
-        class="text-white pl-0 small"
-        color="dark"
-        :labelOpened="$t('applications.filesharing.password.close')"
-        :labelClosed="$t('applications.filesharing.password.open')"
-      />
-    <b-collapse id="collapsePassword">
-      <file-sharing-credentials/>
+    <b-collapse id="collapse-filesharing">
+      <b-card-body>
+        <div class="small" v-html="$t('applications.filesharing.description')"></div>
+        <hr/>
+        <action-button
+          v-b-toggle.collapse-filesharing-password
+          icon="key"
+          class="text-white"
+          color="dark"
+          :labelOpened="$t('applications.filesharing.password.close')"
+          :labelClosed="$t('applications.filesharing.password.open')"
+        />
+        <b-button v-b-popover.hover="$t('applications.filesharing.password.help')" variant="link" class="align-top pt-2">
+            <icon name="question-circle"/>
+          </b-button>
+        <b-collapse id="collapse-filesharing-password">
+          <file-sharing-credentials/>
+        </b-collapse>
+      </b-card-body>
     </b-collapse>
-    </b-card-body>
   </b-card>
 </template>
 
 <script>
 import Switcher from '~/components/actions/Switch'
-import FileSharingCredentials from '~/components/applications/FileSharingCredentials'
+import CollapseCardButton from '~/components/actions/CollapseCardButton'
+import FileSharingCredentials from '~/components/applications/form/FileSharingCredentials'
 import Icon from 'vue-awesome/components/Icon'
 import ActionButton from '~/components/actions/ActionButton'
 
 export default {
   components: {
     Switcher,
+    CollapseCardButton,
     FileSharingCredentials,
     Icon,
     ActionButton
@@ -52,7 +60,7 @@ export default {
   },
   mounted () {
     this.$refs.filesharingSwitch.$on('input', val => {
-      this.$store.dispatch('enableDisableNow', { name: 'filesharing', enable: val })
+      this.$store.dispatch('startStopService', { name: 'filesharing', enable: val })
     })
   }
 }

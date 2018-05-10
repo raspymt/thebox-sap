@@ -1,73 +1,109 @@
 <template>
   <b-card no-body bg-variant="dark" text-variant="white">
     <b-card-header class="clearfix">
-      <switcher
-        ref="mpdSwitch"
-        class="float-left pr-3 mt-3 mb-0"
-        color="dark"
-        typeBold="true"
-        :checked="mpd_active"
-        :disabled="mpd_busy || mpdgui_busy"
-      />
-      <h4 class="float-left mt-2 mb-0">{{ $t('applications.mpd.title') }}</h4>
-      <icon class="switch-icon" name="sync" v-if="mpd_busy || mpdgui_busy" pulse/>
-    </b-card-header>
-    <b-card-body>
-      <div class="small" v-html="$t('applications.mpd.description')"></div>
-    </b-card-body>
-
-    <b-card-body class="pt-0">
-      <div class="clearfix position-relative">
-        <switcher ref="mpdguiSwitch"
-          class="float-left pr-3 pt-1"
+      <div class="clearfix">
+        <switcher
+          ref="mpdSwitch"
           color="dark"
           typeBold="true"
-          :checked="mpdgui_active && mpd_active"
-          :disabled="mpdgui_busy || mpd_busy || !mpd_active"
+          :checked="active"
+          :disabled="busy"
         />
-        <h6 class="float-left">{{ $t('applications.mpdgui.title') }}</h6>
+        <h4 class="card-title">{{ $t('applications.mpd.title') }}</h4>
+        <collapse-card-button v-b-toggle.collapse-mpd/>
+        <manage-link
+          :href="$t('applications.mpdgui.link')"
+          :visible="guiActive && !busy"
+          :title="$t('applications.mpdgui.linkhelp')"/>
       </div>
-      <p class="small" v-html="$t('applications.mpdgui.description')"></p>
-      <transition name="fade">
-        <p v-if="mpdgui_active && !mpdgui_busy" v-html="$t('applications.mpdgui.link')" class="small"></p>
-      </transition>
-    </b-card-body>
+      <div v-if="busy" class="card-header-progress"></div>
+    </b-card-header>
+    <b-collapse id="collapse-mpd">
+      <b-card-body>
+        <transition name="slide">
+          <div v-if="active">
+            <div class="clearfix position-relative">
+              <switcher ref="mpdguiSwitch"
+                class="vue-switcher--small"
+                color="dark"
+                typeBold="true"
+                :checked="guiActive && active"
+                :disabled="busy || !active"
+              />
+              <h6 class="switcher-label mb-0">{{ $t('applications.mpdgui.title') }}</h6>
+            </div>
+            <hr/>
+          </div>
+        </transition>
+        <div class="small" v-html="$t('applications.mpd.description')"></div>
+        <hr/>
+        <action-button
+          v-b-toggle.collapse-mpd-password
+          icon="key"
+          class="text-white"
+          color="dark"
+          :labelOpened="$t('applications.mpd.password.close')"
+          :labelClosed="$t('applications.mpd.password.open')"
+        />
+        <b-button v-b-popover.hover="$t('applications.mpd.password.help')" variant="link" class="align-top pt-2">
+            <icon name="question-circle"/>
+          </b-button>
+        <b-collapse id="collapse-mpd-password">
+          <mpd-credentials/>
+        </b-collapse>
+      </b-card-body>
+    </b-collapse>
   </b-card>
 </template>
 
 <script>
   import Switcher from '~/components/actions/Switch'
+  import CollapseCardButton from '~/components/actions/CollapseCardButton'
+  import MpdCredentials from '~/components/applications/form/MpdCredentials'
+  import ManageLink from '~/components/actions/ManageLink'
   import Icon from 'vue-awesome/components/Icon'
+  import ActionButton from '~/components/actions/ActionButton'
 
   export default {
     components: {
       Switcher,
-      Icon
+      CollapseCardButton,
+      MpdCredentials,
+      ManageLink,
+      Icon,
+      ActionButton
     },
     computed: {
-      mpd_active () {
+      active () {
         return this.$store.state.services.mpd.active
       },
-      mpd_busy () {
-        return this.$store.state.services.mpd.busy
-      },
-      mpdgui_active () {
+      guiActive () {
         return this.$store.state.services.mpdgui.active
       },
-      mpdgui_busy () {
-        return this.$store.state.services.mpdgui.busy
+      busy () {
+        return this.$store.state.services.mpd.busy || this.$store.state.services.mpdgui.busy
+      }
+    },
+    updated () {
+      if (this.$refs.mpdguiSwitch !== undefined) {
+        this.$refs.mpdguiSwitch.$on('input', val => {
+          this.$store.dispatch('startStopService', { name: 'mpdgui', enable: val })
+        })
       }
     },
     mounted () {
       this.$refs.mpdSwitch.$on('input', val => {
-        this.$store.dispatch('enableDisableNow', { name: 'mpd', enable: val })
         if (val === false) {
-          this.$store.commit('SET_STATUS_SERVICE', { service: 'mpdgui', active: false, busy: false })
+          this.$refs.mpdguiSwitch.$off('input')
+          this.$store.dispatch('startStopService', { name: 'mpdgui', enable: false })
         }
+        this.$store.dispatch('startStopService', { name: 'mpd', enable: val })
       })
-      this.$refs.mpdguiSwitch.$on('input', val => {
-        this.$store.dispatch('enableDisableNow', { name: 'mpdgui', enable: val })
-      })
+      if (this.$refs.mpdguiSwitch !== undefined) {
+        this.$refs.mpdguiSwitch.$on('input', val => {
+          this.$store.dispatch('startStopService', { name: 'mpdgui', enable: val })
+        })
+      }
     }
   }
 </script>

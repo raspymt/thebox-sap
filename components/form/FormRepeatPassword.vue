@@ -1,24 +1,27 @@
 <template>
-  <b-form-group id="passwordGroup"
-    label-for="password"
+  <b-form-group 
+    :id="`passwordGroup${_uid}`"
+    :label-for="`password${_uid}`"
     :feedback="passwordFeedback" 
     :state="repeatPasswordState"
-    :description="$t('applications.filesharing.credentials.password.description')"
+    :description="$t('credentials.password.description')"
     >
-    <b-form-input id="password"
+    <b-form-input
+      :id="`password${_uid}`"
       type="password"
       v-model.trim="formPassword"
       :state="passwordState"
       required
-      :placeholder="placeholderPassword"
+      :placeholder="$t(placeholderPassword)"
       v-on:input="updateField"
     ></b-form-input>
-    <b-form-input id="repeatPassword"
+    <b-form-input
+      :id="`repeatPassword${_uid}`"
       type="password"
       v-model.trim="formRepeatPassword"
       :state="repeatPasswordState"
       required
-      :placeholder="placeholderRepeatPassword"
+      :placeholder="$t(placeholderRepeatPassword)"
       v-on:input="updateField"
       class="mt-2"
     ></b-form-input>
@@ -28,8 +31,12 @@
 <script>
 export default {
   props: {
-    placeholderPassword: '',
-    placeholderRepeatPassword: ''
+    placeholderPassword: {
+      default: 'credentials.password.title'
+    },
+    placeholderRepeatPassword: {
+      default: 'credentials.password.repeat'
+    }
   },
   data () {
     return {
@@ -54,9 +61,9 @@ export default {
       if (this.formPassword.length === 0) {
         return null
       } else if (this.formPassword.length > 0 && this.formPassword.length < 7) {
-        return this.$t('applications.filesharing.credentials.password.feedback.not_empty')
+        return this.$t('credentials.password.feedback.not_empty')
       } else if (this.formRepeatPassword.length !== 0 && this.formRepeatPassword !== this.formPassword) {
-        return this.$t('applications.filesharing.credentials.password.feedback.password_no_match')
+        return this.$t('credentials.password.feedback.password_no_match')
       } else {
         return null
       }

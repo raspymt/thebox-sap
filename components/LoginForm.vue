@@ -2,7 +2,7 @@
   <div>
 
     <b-form @submit.prevent="login">
-      <transition name="fade">
+      <transition name="slide">
         <b-alert
           variant="warning"
           dismissible
@@ -57,16 +57,16 @@ export default {
   },
   computed: {
     usernameFeedback () {
-      return this.formUsername.length > 0 ? this.$t('login.form.username.feedback.not_empty') : this.$t('login.form.username.feedback.empty')
+      return this.$t('login.form.username.feedback.empty')
     },
     usernameState () {
-      return this.formUsername.length > 3 ? 'valid' : 'invalid'
+      return this.formUsername.length > 0 ? 'valid' : 'invalid'
     },
     passwordFeedback () {
-      return this.formPassword.length > 0 ? this.$t('login.form.password.feedback.not_empty') : this.$t('login.form.password.feedback.empty')
+      return this.$t('login.form.password.feedback.empty')
     },
     passwordState () {
-      return this.formPassword.length > 6 ? 'valid' : 'invalid'
+      return this.formPassword.length > 0 ? 'valid' : 'invalid'
     },
     disabledSubmit () {
       return !(this.passwordState === 'valid' && this.usernameState === 'valid')

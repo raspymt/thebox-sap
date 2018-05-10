@@ -1,25 +1,67 @@
 <template>
   <div>
-    <page-header/>
-    <p>
-      Hello {{ $store.getters.getUsername }}
-    </p>
-    <p>
-      {{ $t('index.content.description') }}
-    </p>
+    <!-- <page-header/> -->
+    <b-row class="margin-header">
+      <b-col lg="4" md="6" sm="12">
+        <h2 class="text-white cards-title">{{ $t('applications.title') }}</h2>
+        <file-sharing/>
+        <mpd/>
+        <cloud-storage/>
+        <torrent/>
+        <upnp-dlna/>
+      </b-col>
+      <b-col lg="4" md="6" sm="12">
+        <h2 class="text-white cards-title">{{ $t('wifi.title') }}</h2>
+        <networks/>
+        <access-point/>
+        <h2 class="text-white cards-title">{{ $t('medias.title') }}</h2>
+        <mounts/>
+      </b-col>
+      <!-- <b-col lg="4" md="6" sm="12" class="mt-4">
+        <h2 class="text-white">{{ $t('medias.title') }}</h2>
+        <mounts/>
+      </b-col> -->
+    </b-row>
   </div>
 </template>
 
 <script>
-import PageHeader from '~/components/PageHeader.vue'
+// import PageHeader from '~/components/PageHeader.vue'
+
+import Mpd from '~/components/applications/Mpd.vue'
+import FileSharing from '~/components/applications/FileSharing.vue'
+import Torrent from '~/components/applications/Torrent.vue'
+import UpnpDlna from '~/components/applications/UpnpDlna.vue'
+import CloudStorage from '~/components/applications/CloudStorage.vue'
+
+import Networks from '~/components/wifi/Networks.vue'
+import AccessPoint from '~/components/wifi/AccessPoint.vue'
+
+import Mounts from '~/components/medias/Mounts'
 
 export default {
   middleware: 'authenticated',
+  async fetch ({ store, params }) {
+    try {
+      await store.dispatch('statuses')
+      await store.dispatch('medias')
+    } catch (e) {
+      console.log(e)
+    }
+  },
   components: {
-    PageHeader
+    // PageHeader,
+    FileSharing,
+    Mpd,
+    Torrent,
+    UpnpDlna,
+    CloudStorage,
+    Networks,
+    AccessPoint,
+    Mounts
   },
   head () {
-    return { title: this.$t('index.title') }
+    return { title: `${this.$t('title')} - ${this.$t('index.title')}` }
   },
   mounted () {
     this.$store.commit('SET_PAGE', 'index')

@@ -3,44 +3,78 @@
     <b-card-header class="clearfix">
       <switcher
         ref="cloudstorageSwitch"
-        class="float-left pr-3 mt-3 mb-0"
         color="dark"
         typeBold="true"
         :checked="active"
         :disabled="busy"
       />
-      <h4 class="float-left mb-0 mt-2">{{ $t('applications.cloudstorage.title') }}</h4>
-      <icon class="switch-icon" name="sync" v-if="busy" pulse/>
+      <h4 class="card-title">{{ $t('applications.cloudstorage.title') }}</h4>
+      <collapse-card-button v-b-toggle.collapse-cloudstorage/>
+      <manage-link
+        :href="$t('applications.cloudstorage.link')"
+        :visible="active && !busy"
+        :title="$t('applications.cloudstorage.linkhelp')"/>
+      <div v-if="busy" class="card-header-progress"></div>
     </b-card-header>
-    <b-card-body>
-      <div class="small" v-html="$t('applications.cloudstorage.description')"></div>
-      <transition name="slide">
-        <p v-if="active && !busy" v-html="$t('applications.cloudstorage.link')" class="small"></p>
-      </transition>
-    </b-card-body>
+    <b-collapse id="collapse-cloudstorage">
+      <b-card-body>
+        <div class="small" v-html="$t('applications.cloudstorage.description')"></div>
+        <hr/>
+        <action-button
+          v-b-toggle.collapse-cloudstorage-storage
+          icon="hdd"
+          class="text-white"
+          color="dark"
+          :labelOpened="$t('applications.cloudstorage.storage.close')"
+          :labelClosed="$t('applications.cloudstorage.storage.open')"
+        />
+        <b-button v-b-popover.hover="$t('applications.cloudstorage.storage.help')" variant="link" class="align-top pt-2">
+          <icon name="question-circle"/>
+        </b-button>
+        <b-collapse ref="cloudstorageStorage" id="collapse-cloudstorage-storage">
+          <cloudstorage-storage/>
+        </b-collapse>
+      </b-card-body>
+  </b-collapse>
   </b-card>
 </template>
 
 <script>
   import Switcher from '~/components/actions/Switch'
+  import CloudstorageStorage from '~/components/applications/cloudstorage/CloudstorageStorage'
+  import CollapseCardButton from '~/components/actions/CollapseCardButton'
+  import ManageLink from '~/components/actions/ManageLink'
   import Icon from 'vue-awesome/components/Icon'
+  import ActionButton from '~/components/actions/ActionButton'
 
   export default {
     components: {
       Switcher,
-      Icon
+      CloudstorageStorage,
+      CollapseCardButton,
+      ManageLink,
+      Icon,
+      ActionButton
+    },
+    data () {
+      return {
+        busyChildren: false
+      }
     },
     computed: {
       active () {
         return this.$store.state.services.cloudstorage.active
       },
       busy () {
-        return this.$store.state.services.cloudstorage.busy
+        return this.$store.state.services.cloudstorage.busy || this.busyChildren
       }
     },
     mounted () {
+      this.$refs.cloudstorageStorage.$on('busy', val => {
+        this.busyChildren = val
+      })
       this.$refs.cloudstorageSwitch.$on('input', val => {
-        this.$store.dispatch('enableDisableNow', { name: 'cloudstorage', enable: val })
+        this.$store.dispatch('startStopService', { name: 'cloudstorage', enable: val })
       })
     }
   }
