@@ -21,7 +21,7 @@
     "nuxt": "^1.4.0"
   },
   "devDependencies": {
-    "auth0-lock": "^11.6.1",
+    "auth0-lock": "^11.7.0",
     "axios": "^0.18.0",
     "babel-eslint": "^8.2.3",
     "bootstrap": "^4.1.1",
@@ -32,7 +32,7 @@
     "eslint-plugin-html": "^4.0.3",
     "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
     "jquery": "^3.3.1",
     "js-cookie": "^2.2.0",
