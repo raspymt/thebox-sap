@@ -1,8 +1,6 @@
-WARNING: Work in progress - DO NOT USE...
+# thebox-sap
 
-# the-box-web-management
-
-> The Box web management
+> The Box UI admin
 
 ## Build Setup
 
@@ -21,4 +19,4 @@ $ npm start
 $ npm run generate
 ```
 
-For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
+For detailed explanation on how things work, check out the [Nuxt.js](https://github.com/nuxt/nuxt.js) and [Vuetify.js](https://vuetifyjs.com/) documentation.
