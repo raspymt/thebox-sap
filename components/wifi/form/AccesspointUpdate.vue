@@ -1,7 +1,7 @@
 <template>
   <div class="position-relative mt-2 border p-1">
     <icon class="switch-icon__absolute" name="sync" v-if="busy" pulse/>
-    <b-form @submit.prevent="updateCredentials">
+    <b-form @submit.prevent="updateAccesspoint">
       <transition name="slide">
         <b-alert 
           :variant="alertVariant"
@@ -12,7 +12,7 @@
           {{ formAlert }}
         </b-alert>
       </transition>
-      <form-username ref="username"/>
+      <form-ssid ref="ssid"/>
       <form-repeat-password ref="repeatPassword"/>
       <b-button type="submit" variant="light" :disabled="disabledSubmit">{{ $t('credentials.submit') }}</b-button>
     </b-form>
@@ -21,13 +21,13 @@
 
 <script>
 import Icon from 'vue-awesome/components/Icon'
-import FormUsername from '~/components/form/FormUsername.vue'
+import FormSsid from '~/components/form/FormUsername.vue'
 import FormRepeatPassword from '~/components/form/FormRepeatPassword.vue'
 
 export default {
   components: {
     Icon,
-    FormUsername,
+    FormSsid,
     FormRepeatPassword
   },
   data () {
@@ -41,12 +41,14 @@ export default {
     }
   },
   mounted () {
-    this.$refs.username.formUsername = this.$store.state.services.torrent.username
-    this.$refs.username.$on('usernameChanged', e => {
-      this.disabledSubmit = !(this.$refs.username.isValid && this.$refs.repeatPassword.isValid)
+    this.$refs.ssid.formUsername = this.$store.state.services.accesspoint.ssid
+    this.$refs.ssid.placeholderUsername = 'wifi.accesspoint.update.ssidusername'
+    this.$refs.ssid.descriptionUsername = 'wifi.accesspoint.update.ssiddescription'
+    this.$refs.ssid.$on('usernameChanged', e => {
+      this.disabledSubmit = !(this.$refs.ssid.isValid && this.$refs.repeatPassword.isValid)
     })
     this.$refs.repeatPassword.$on('passwordChanged', e => {
-      this.disabledSubmit = !(this.$refs.username.isValid && this.$refs.repeatPassword.isValid)
+      this.disabledSubmit = !(this.$refs.ssid.isValid && this.$refs.repeatPassword.isValid)
     })
   },
   methods: {
@@ -56,11 +58,11 @@ export default {
     alertShow () {
       this.alertDismissCountDown = this.alertDismissSecs
     },
-    async updateCredentials () {
+    async updateAccesspoint () {
       try {
         this.busy = true
-        const result = await this.$store.dispatch('updateTorrentCredentials', { username: this.$refs.username.formUsername, password: this.$refs.repeatPassword.formPassword })
-        // this.$refs.username.clear()
+        const result = await this.$store.dispatch('updateAccesspoint', { ssid: this.$refs.ssid.formUsername, password: this.$refs.repeatPassword.formPassword })
+        // this.$refs.ssid.clear()
         this.$refs.repeatPassword.clear()
         this.formAlert = null
         if (result === true) {

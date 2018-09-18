@@ -20,17 +20,11 @@
 
 <script>
 export default {
-  props: {
-    placeholderUsername: {
-      default: 'credentials.username.title'
-    },
-    descriptionUsername: {
-      default: 'credentials.username.description'
-    }
-  },
   data () {
     return {
-      formUsername: ''
+      formUsername: '',
+      placeholderUsername: 'credentials.username.title',
+      descriptionUsername: 'credentials.username.description'
     }
   },
   methods: {

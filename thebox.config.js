@@ -23,7 +23,8 @@ module.exports = {
     upnpdlna: 'upnpdlna',
     upnpdlnaRebuild: 'rebuildUpnpDlna',
     upnpdlnaRescan: 'rescanUpnpDlna',
-    cloudstorage: 'cloudstorage',
+    syncthing: 'syncthing',
+    resilio: 'resilio',
     startService: 'startService',
     stopService: 'stopService',
     medias: 'medias',
@@ -32,9 +33,7 @@ module.exports = {
     unmount: 'unmount',
     wifi: 'wifi',
     accesspoint: 'accesspoint',
-    networks: 'networks',
-    listDirectories: 'listDirectories',
-    createCloudStorageDirectory: 'createCloudStorageDirectory',
-    setCloudStorageDirectory: 'setCloudStorageDirectory'
+    accesspointUpdate: 'accesspointUpdate',
+    networks: 'networks'
   }
 }

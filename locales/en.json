@@ -25,7 +25,12 @@
       "poweroff": "Error during shutdown The Box.",
       "reboot": "Error restarting The Box."
     },
-    "statuses": "There has been an error retriving applcation statuses."
+    "statuses": "There has been an error retriving applcation statuses.",
+    "accesspoint": {
+      "ssid": {
+        "update": "There has been an error updating SSID access point."
+      }
+    }
   },
   "credentials": {
     "submit": "Submit",
@@ -95,7 +100,15 @@
     },
     "accesspoint": {
       "title": "Access Point",
-      "description": "Create a wifi access point. You can use this to create a wifi relay or to directly connect to The Box."
+      "description": "<p>Create a wifi access point. You can use this to create a wifi relay or to directly connect to The Box.</p>",
+      "ssidname": "The current SSID name is: ",
+      "update": {
+        "help": "Update your accesspoint SSID name and password.",
+        "open": "Access point update",
+        "close": "Hide access point update",
+        "ssidusername": "SSID",
+        "ssiddescription": "Enter your new SSID name."
+      }
     }
   },
   "medias": {
@@ -144,7 +157,7 @@
     },
     "upnpdlna": {
       "title": "UPNP / DLNA",
-      "description": "<p>Play your media on your external devices. You can find informations about UPNP <a href=\"https://en.wikipedia.org/wiki/Universal_Plug_and_Play\" target=\"_blank\">here</a> and DLNA <a href=\"https://en.wikipedia.org/wiki/Digital_Living_Network_Alliance\" target=\"_blank\">here</a>.</p><p>You can access your media with VLC or there is plenty of software that can access UPNP/DLNA server.</p>",
+      "description": "<p>Play your media on your external devices. You can find informations about UPNP <a href=\"https://en.wikipedia.org/wiki/Universal_Plug_and_Play\" target=\"_blank\">here</a> and DLNA <a href=\"https://en.wikipedia.org/wiki/Digital_Living_Network_Alliance\" target=\"_blank\">here</a>.</p>",
       "link": "http://thebox:8200",
       "linkhelp": "Check UPNP/DLNA status.",
       "rescan": "Rescan medias",
@@ -154,32 +167,17 @@
       "rebuilding": "Rebuilding medias database...",
       "rebuildhelp": "If you cannot find your library or experience trouble connecting the service, rebuild your medias database can help. It could take a long time if you have a lot of disks connected."
     },
-    "cloudstorage": {
-      "title": "Cloud storage",
-      "description": "<p>Sync and share files across your devices. The Box use <a href=\"https://www.seafile.com\" target=\"_blank\">Seafile</a> as the cloud storage server.</p>",
-      "link": "http://thebox:8000",
-      "linkhelp": "Manage your cloud storage server.",
-      "storage": {
-        "help": "Change your storage location to another disk or directory. It could take a long time if you have a lot of files and you change the location to another disk. Check recovery mode to recover from an old storage location.",
-        "open": "Storage location update",
-        "close": "Hide storage location update",
-        "storagefolder": "Current Seafile data folder: ",
-        "currentfolder": "Current folder:",
-        "createfolder": "Create folder",
-        "selectfolder": "Select folder",
-        "upfolder": "Up a folder",
-        "emptydir": "Folder is empty, you can select it to store your cloud data.",
-        "recoverymode": "Recovery",
-        "recoverymodehelp": "Recovery mode",
-        "storagerecovery": "You can select it to store your cloud data.",
-        "createfolderinput": "New folder name",
-        "createfolderinputvalidate": "Confirm folder creation",
-        "createfolderinputempty": "Folder cannot be empty.",
-        "error": {
-          "exist": "Folder already exists.",
-          "empty": "Folder cannot be empty."
-        }
-      }
+    "syncthing": {
+      "title": "Syncthing",
+      "description": "<p>Syncthing replaces proprietary sync and cloud services with something open, trustworthy and decentralized.</p><p>Learn more about Syncthing <a href='https://syncthing.net/' target='_blank'>here</a>.</p><p>IOS users should use Resilio (see below) as there is no Syncthing client for IOS.</p>",
+      "link": "http://thebox:8384",
+      "linkhelp": "Syncthing web UI."
+    },
+    "resilio": {
+      "title": "Resilio",
+      "description": "<p>A fast, reliable, and simple file sync and share solution.</p><p>Learn more about Resilio <a href='https://www.resilio.com/' target='_blank'>here</a>.</p>",
+      "link": "http://thebox:8888",
+      "linkhelp": "Resilio web UI."
     }
   },
   "user": {

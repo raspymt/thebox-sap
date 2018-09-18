@@ -7,7 +7,7 @@ const api = require('../thebox.config.js').api
  * Helpers
  */
 const encodeParams = (action, params = {}) => {
-  return { params: { s: window.btoa(JSON.stringify({...params, action: action})) } }
+  return { params: { s: window.btoa(JSON.stringify({ ...params, action: action })) } }
 }
 
 export const state = () => ({
@@ -48,6 +48,14 @@ export const state = () => ({
       busy: false,
       username: ''
     },
+    resilio: {
+      active: false,
+      busy: false
+    },
+    syncthing: {
+      active: false,
+      busy: false
+    },
     wifi: {
       active: false,
       busy: false
@@ -56,12 +64,6 @@ export const state = () => ({
       active: false,
       busy: false,
       ssid: ''
-    },
-    cloudstorage: {
-      active: false,
-      busy: false,
-      // default seafile data directory
-      storageFolder: '/srv/seafile/thebox/seafile-data'
     }
   }
 })
@@ -85,9 +87,11 @@ export const mutations = {
   },
   SET_STATUSES_SERVICE: (state, data) => {
     Object.keys(data).forEach(function (key) {
-      Object.keys(data[key]).forEach(function (k) {
-        state.services[key][k] = data[key][k]
-      })
+      if (state.services[key] !== undefined) {
+        Object.keys(data[key]).forEach(function (k) {
+          state.services[key][k] = data[key][k]
+        })
+      }
     })
   },
   SET_PAGE: (state, page) => {
@@ -232,6 +236,15 @@ export const actions = {
     }
   },
 
+  async updateAccesspoint ({ commit }, { ssid, password }) {
+    try {
+      return this.$axios.$post(api.rpc, encodeParams(api.accesspointUpdate, { credentials: 'UpdateSSID ' + window.btoa(`${ssid}:${password}`) }))
+    } catch (error) {
+      console.log(error)
+      throw new Error(this.app.i18n.t('errors.accesspoint.ssid.update'))
+    }
+  },
+
   async rescanUpnpDlna ({ commit }) {
     try {
       const success = await this.$axios.$post(api.rpc, encodeParams(api.startService, { service: api.upnpdlnaRescan }))
@@ -280,33 +293,6 @@ export const actions = {
     } catch (error) {
       console.log(error)
       throw new Error(this.app.i18n.t('errors.medias.list'))
-    }
-  },
-
-  async listDirectories ({ commit }, directory) {
-    try {
-      return this.$axios.$get(api.rpc, encodeParams(api.listDirectories, { directory: directory }))
-    } catch (error) {
-      console.log(error)
-      throw new Error(this.app.i18n.t('errors.directories.list'))
-    }
-  },
-
-  async createCloudStorageDirectory ({ commit }, directory) {
-    try {
-      return this.$axios.$post(api.rpc, encodeParams(api.createCloudStorageDirectory, { directory: directory }))
-    } catch (error) {
-      console.log(error)
-      throw new Error(this.app.i18n.t('errors.directories.create'))
-    }
-  },
-
-  async setCloudStorageDirectory ({ commit }, { directory, recovery }) {
-    try {
-      return this.$axios.$post(api.rpc, encodeParams(api.setCloudStorageDirectory, { directory: directory, recovery: recovery }))
-    } catch (error) {
-      console.log(error)
-      throw new Error(this.app.i18n.t('errors.cloudstoorage.setstorage'))
     }
   },
 

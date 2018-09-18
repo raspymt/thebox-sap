@@ -6,9 +6,10 @@
         <h2 class="text-white cards-title">{{ $t('applications.title') }}</h2>
         <file-sharing/>
         <mpd/>
-        <cloud-storage/>
         <torrent/>
         <upnp-dlna/>
+        <syncthing/>
+        <resilio/>
       </b-col>
       <b-col lg="4" md="6" sm="12">
         <h2 class="text-white cards-title">{{ $t('wifi.title') }}</h2>
@@ -32,7 +33,8 @@ import Mpd from '~/components/applications/Mpd.vue'
 import FileSharing from '~/components/applications/FileSharing.vue'
 import Torrent from '~/components/applications/Torrent.vue'
 import UpnpDlna from '~/components/applications/UpnpDlna.vue'
-import CloudStorage from '~/components/applications/CloudStorage.vue'
+import Syncthing from '~/components/applications/Syncthing.vue'
+import Resilio from '~/components/applications/Resilio.vue'
 
 import Networks from '~/components/wifi/Networks.vue'
 import AccessPoint from '~/components/wifi/AccessPoint.vue'
@@ -43,8 +45,8 @@ export default {
   middleware: 'authenticated',
   async fetch ({ store, params }) {
     try {
+      store.dispatch('medias')
       await store.dispatch('statuses')
-      await store.dispatch('medias')
     } catch (e) {
       console.log(e)
     }
@@ -55,7 +57,8 @@ export default {
     Mpd,
     Torrent,
     UpnpDlna,
-    CloudStorage,
+    Syncthing,
+    Resilio,
     Networks,
     AccessPoint,
     Mounts
