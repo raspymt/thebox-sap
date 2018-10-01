@@ -123,7 +123,7 @@
     "title": "Applications",
     "mpd": {
       "title": "MPD",
-      "description": "<p>Listen to your music on The Box. You can find informations on MPD <a href=\"https://en.wikipedia.org/wiki/Music_Player_Daemon\" target=\"_blank\">here</a>.<p><p>You'll need an MPD client to control the music. There are many available MPD clients for Android, IOS or for your computer. For Android I recommend <a href=\"https://play.google.com/store/apps/details?id=com.namelessdev.mpdroid\" target=\"_blank\">MPDroid</a>, it's free.</p>",
+      "description": "<p>Listen to your music on The Box. You can find informations on MPD <a href=\"https://en.wikipedia.org/wiki/Music_Player_Daemon\" target=\"_blank\">here</a>.<p>",
       "password": {
         "open": "Password update",
         "close": "Hide password update",
