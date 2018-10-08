@@ -32,6 +32,7 @@ module.exports = {
     reboot: 'reboot',
     unmount: 'unmount',
     wifi: 'wifi',
+    connectWifi: 'connectWifi',
     accesspoint: 'accesspoint',
     accesspointUpdate: 'accesspointUpdate',
     networks: 'networks'

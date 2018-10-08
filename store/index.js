@@ -107,12 +107,14 @@ export const mutations = {
     state.wifiStatus = status
   },
   SET_WIFI_NETWORKS: (state, networks) => {
-    state.wifiNetworks = networks.map(e => {
-      if (e.ssid === state.wifiStatus.ssid) {
-        e.connected = true
-      }
-      return e
-    })
+    if (networks !== undefined) {
+      state.wifiNetworks = networks.map(e => {
+        if (e.ssid === state.wifiStatus.ssid) {
+          e.connected = true
+        }
+        return e
+      })
+    }
   },
   SET_MEDIAS: (state, medias) => {
     state.medias = medias
@@ -282,6 +284,15 @@ export const actions = {
     } catch (error) {
       console.log(error)
       throw new Error(this.app.i18n.t('errors.networks'))
+    }
+  },
+
+  async connectWifi ({ commit }, network) {
+    try {
+      return this.$axios.$post(api.rpc, encodeParams(api.connectWifi, network))
+    } catch (error) {
+      console.log(error)
+      throw new Error(this.app.i18n.t('errors.wifi.connect'))
     }
   },
 
