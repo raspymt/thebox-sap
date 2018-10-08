@@ -88,7 +88,7 @@
   "index": {
     "title": "Home",
     "content": {
-      "description": "Welcome to The Box. This is were you will be able to manage all The Box parameters."
+      "description": "Welcome to The Box. This is were you manage all The Box parameters."
     }
   },
   "wifi": {
@@ -101,7 +101,7 @@
     "accesspoint": {
       "title": "Access Point",
       "description": "<p>Create a wifi access point. You can use this to create a wifi relay or to directly connect to The Box.</p>",
-      "ssidname": "The current SSID name is: ",
+      "ssidname": "Current SSID: ",
       "update": {
         "help": "Update your accesspoint SSID name and password.",
         "open": "Access point update",
@@ -109,6 +109,13 @@
         "ssidusername": "SSID",
         "ssiddescription": "Enter your new SSID name."
       }
+    },
+    "modal": {
+      "text": "WIFI password",
+      "okTitle": "Connect",
+      "cancelTitle": "Cancel",
+      "pskPlaceholder": "Password",
+      "shortPassword": "Password must be at least 8 characters long."
     }
   },
   "medias": {
@@ -165,7 +172,7 @@
       "rescanhelp": "Rescan your medias if you added some USB devices and you cannot find their medias in your library.",
       "rebuild": "Rebuild medias database",
       "rebuilding": "Rebuilding medias database...",
-      "rebuildhelp": "If you cannot find your library or experience trouble connecting the service, rebuild your medias database can help. It could take a long time if you have a lot of disks connected."
+      "rebuildhelp": "If you cannot find your library or experience trouble connecting the service, rebuild your medias database can help. It could take a long time if you have a lot of media files."
     },
     "syncthing": {
       "title": "Syncthing",

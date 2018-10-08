@@ -1,32 +1,83 @@
 {
-  "on": "Marche",
-  "off": "Arrêt",
+  "title": "The Box",
+  "on": "On",
+  "off": "Off",
+  "system": {
+    "power": {
+      "modal": {
+        "shutdowntext": "Êtes-vous sûr de vouloir éteindre The Box ?",
+        "restarttext": "Êtes-vous sûr de vouloir redémarer The Box ?",
+        "shutdownok": "Oui",
+        "restartok": "Oui",
+        "shutdowncancel": "Annuler",
+        "restartcancel": "Annuler",
+        "shutdownconfirmation": "The Box va s'éteindre maintenant.",
+        "restartconfirmation": "The Box redémarre. Veuillez patienter un instant.",
+        "offline": "The Box est déconnecté ..."
+      }
+    }
+  },
   "errors": {
-    "credentials": "Erreur d'identification. Veuillez essayer à nouveau."
+    "credentials": "Mauvaises références. Veuillez réessayer.",
+    "service": {
+      "enablenow": "Erreur lors de l'activation du service.",
+      "disablenow": "Erreur de désactivation du service.",
+      "poweroff": "The Box a rencontré une erreur lors de son arrêt.",
+      "reboot": "The Box a rencontré une erreur lors de son redémarrage."
+    },
+    "statuses": "Une erreur est survenue lors de la récupération des statuts des applications.",
+    "accesspoint": {
+      "ssid": {
+        "update": "Une erreur s'est produite lors de la mise à jour du point d'accès SSID."
+      }
+    }
+  },
+  "credentials": {
+    "submit": "Envoyer",
+    "success": "Les informations d'identification ont été mises à jour avec succès.",
+    "successpassword": "Le mot de passe a été mis à jour avec succès.",
+    "username": {
+      "title": "Nom d'utilisateur",
+      "description": "Entrez votre nouveau nom d'utilisateur.",
+      "feedback": {
+        "not_empty": "Votre nom d'utilisateur doit comporter au moins 3 caractères."
+      }
+    },
+    "password": {
+      "title": "Mot de passe",
+      "description": "Entrez votre nouveau mot de passe.",
+      "repeat": "Veuillez répéter votre mot de passe.",
+      "feedback": {
+        "not_empty": "Votre mot de passe doit comporter au moins 7 caractères.",
+        "password_no_match": "Les mots de passe ne correspondent pas."
+      }
+    }
   },
   "links": {
     "home": "Accueil",
+    "profile": "Paramètres",
     "wifi": "Wifi",
+    "medias": "Médias",
     "applications": "Applications",
-    "login": "Se connecter",
-    "logout": "Se déconnecter"
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "shutdown": "Arrêt",
+    "restart": "Redémarer"
   },
   "login": {
     "title": "Connexion",
-    "username": "Utilisateur",
-    "password": "Mot-de-passe",
-    "login": "Connexion",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "login": "Se connecter",
     "form": {
       "username": {
         "feedback": {
-          "empty": "Veuillez saisir votre nom d'utilisateur.",
-          "not_empty": "Votre nom d'utilisateur doit comporter au moins 4 caractères."
+          "empty": "Veuillez saisir votre nom d'utilisateur"
         }
       },
       "password": {
         "feedback": {
-          "empty": "Veuillez saisir votre mot-de-passe.",
-          "not_empty": "Votre mot-de-passe doit comporter au moins 7 caractères."
+          "empty": "Veuillez saisir votre mot de passe"
         }
       }
     }
@@ -34,35 +85,131 @@
   "logout": {
     "title": "Déconnexion"
   },
-  "home": {
+  "index": {
     "title": "Accueil",
     "content": {
-      "description": "Welcome to The Box. This is were you will be able to manage all The Box parameters."
+      "description": "Bienvenue dans The Box. C’est ici que vous pouvez gérer tous les paramètres de The Box."
     }
   },
   "wifi": {
-    "title": "Wifi"
+    "title": "Wifi",
+    "networks": {
+      "title": "Réseaux",
+      "description": "Gérez votre connexion wifi.",
+      "connected": "Connecté"
+    },
+    "accesspoint": {
+      "title": "Point d'accès",
+      "description": "<p>Créer un point d'accès wifi. Vous pouvez l'utiliser pour créer un relais wifi ou pour vous connecter directement à The Box.</p>",
+      "ssidname": "SSID actuel : ",
+      "update": {
+        "help": "Mettez à jour le nom et le mot de passe de votre point d'accès.",
+        "open": "Mise à jour du point d'accès",
+        "close": "Masquer la mise à jour du point d'accès",
+        "ssidusername": "SSID",
+        "ssiddescription": "Entrez votre nouvel SSID."
+      }
+    },
+    "modal": {
+      "text": "Mot de passe WIFI",
+      "okTitle": "Connecter",
+      "cancelTitle": "Annuler",
+      "pskPlaceholder": "Mot de passe",
+      "shortPassword": "Le mot de passe doit comporter au moins 8 caractères."
+    }
+  },
+  "medias": {
+    "title": "Médias",
+    "mounts": {
+      "title": "Disques USB"
+    },
+    "eject": "Éjecter {disk}",
+    "sync": "Actualiser les disques USB"
   },
   "applications": {
     "title": "Applications",
     "mpd": {
       "title": "MPD",
-      "description": "Controler ce que vous écoutez sur The Box."
+      "description": "<p>Écoutez votre musique sur The Box. Vous trouverez des informations sur MPD <a href=\"https://en.wikipedia.org/wiki/Music_Player_Daemon\" target=\"_blank\">ici</a>.<p>",
+      "password": {
+        "open": "Mise à jour du mot de passe",
+        "close": "Masquer la mise à jour du mot de passe",
+        "help": "Mettez à jour votre mot de passe MPD."
+      }
     },
-    "ympd": {
-      "title": "MPD GUI"
+    "mpdgui": {
+      "title": "MPD GUI",
+      "link": "http://thebox:8080",
+      "linkhelp": "Contrôlez votre musique depuis votre navigateur."
     },
-    "samba": {
+    "filesharing": {
       "title": "Partage",
-      "description": "Share your USB disks over your local network."
+      "description": "<p>Partagez vos disques USB sur votre réseau local.</p>",
+      "password": {
+        "open": "Mise à jour du mot de passe",
+        "close": "Masquer la mise à jour du mot de passe",
+        "help": "Mettez à jour votre mot de passe de partage réseau. Le nom d'utilisateur pour se connecter à vos partages est 'thebox'"
+      }
     },
-    "torrents": {
+    "torrent": {
       "title": "Torrents",
-      "description": "Torrents download manager."
+      "description": "<p>Gestionnaire de téléchargement de Torrents.</p>",
+      "link": "http://thebox:9091",
+      "linkhelp": "Gérez vos torrents.",
+      "credentials": {
+        "open": "Mise à jour des informations d'identification",
+        "close": "Masquer la mise à jour des informations d'identification",
+        "help": "Mettez à jour votre nom d'utilisateur et votre mot de passe pour gérer vos torrents."
+      }
     },
     "upnpdlna": {
-      "title": "Serveur UPNP / DLNA",
-      "description": "Acces your media on your external devices."
+      "title": "UPNP / DLNA",
+      "description": "<p>Lisez vos fichiers multimédias sur vos périphériques externes. Vous trouverez des informations sur UPNP <a href=\"https://en.wikipedia.org/wiki/Universal_Plug_and_Play\" target=\"_blank\">ici</a> et DLNA <a href=\"https://en.wikipedia.org/wiki/Digital_Living_Network_Alliance\" target=\"_blank\">ici</a>.</p>",
+      "link": "http://thebox:8200",
+      "linkhelp": "Vérifier le statut UPNP/DLNA.",
+      "rescan": "Rescanner les médias",
+      "rescanning": "Scan des médias en cours...",
+      "rescanhelp": "Rescannez vos médias si vous avez ajouté des périphériques USB et que vous ne trouvez pas leurs médias dans votre bibliothèque.",
+      "rebuild": "Reconstruire la base de données",
+      "rebuilding": "Reconstruction de la base de données des médias en cours...",
+      "rebuildhelp": "Si vous ne trouvez pas votre bibliothèque ou rencontrez des difficultés pour vous connecter au service, reconstruire votre base de données des médias peut aider. Cela peut prendre du temps si vous avez beaucoup de fichiers médias."
+    },
+    "syncthing": {
+      "title": "Syncthing",
+      "description": "<p>Syncthing remplace les services cloud et de synchronisation propriétaires par quelque chose d'ouvert, digne de confiance et décentralisé.</p><p>En savoir plus sur Syncthing <a href='https://syncthing.net/' target='_blank'>ici</a>.</p><p>Les utilisateurs d’IOS doivent utiliser Resilio (voir ci-dessous) car il n’existe pas de client Syncthing pour IOS.</p>",
+      "link": "http://thebox:8384",
+      "linkhelp": "Gérer Syncthing."
+    },
+    "resilio": {
+      "title": "Resilio",
+      "description": "<p>Solution de partage et de synchronisation de fichiers simple, rapide et fiable.</p><p>En savoir plus sur Resilio <a href='https://www.resilio.com/' target='_blank'>ici</a>.</p>",
+      "link": "http://thebox:8888",
+      "linkhelp": "Gérer Resilio."
+    }
+  },
+  "user": {
+    "title": "Paramètres de l'utilisateur",
+    "credentials": {
+      "title": "Informations d'identification de l'application",
+      "description": "<p>Modifiez votre nom d'utilisateur et votre mot de passe.</p>",
+      "submit": "Envoyer",
+      "username": {
+        "title": "Nom d'utilisateur",
+        "description": "Entrez votre nouveau nom d'utilisateur ou votre ancien si vous ne voulez pas le changer.",
+        "feedback": {
+          "not_empty": "Votre nom d'utilisateur doit comporter au moins 4 caractères."
+        }
+      },
+      "password": {
+        "title": "Mot de passe",
+        "description": "Entrez votre nouveau mot de passe ou l'ancien si vous ne voulez pas le changer.",
+        "repeat": "Veuillez répéter votre mot de passe",
+        "feedback": {
+          "not_empty": "Votre mot de passe doit comporter au moins 7 caractères.",
+          "password_no_match": "Les mots de passe ne correspondent pas."
+        }
+      },
+      "success": "Le nom d'utilisateur et le mot de passe ont été modifiés avec succès."
     }
   }
 }
