@@ -30,7 +30,8 @@
       "ssid": {
         "update": "There has been an error updating SSID access point."
       }
-    }
+    },
+    "networks": "There has been an error in retrieving networks status."
   },
   "credentials": {
     "submit": "Submit",
