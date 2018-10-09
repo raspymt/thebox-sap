@@ -136,7 +136,7 @@ export default {
             clearInterval(this.syncNetworkInterval)
             this.$store.commit('SET_WIFI_NETWORKS', [])
           } else {
-            this.syncNetworks()
+            this.syncNetworkTimeout = setTimeout(this.syncNetworks, 1000)
             this.syncNetworkInterval = setInterval(this.syncNetworks, 10000)
           }
         })
