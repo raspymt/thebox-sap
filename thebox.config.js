@@ -1,5 +1,5 @@
 module.exports = {
-  browserBaseURL: 'http://thebox/api/v1/',
+  browserBaseURL: '/api/v1/',
   baseURL: 'http://localhost:3000/',
   /*
   ** The Box API
